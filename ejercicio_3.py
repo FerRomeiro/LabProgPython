@@ -14,13 +14,15 @@ e. Producto de los negativos.
 contador = 0
 contador_Pares = 0
 contador_Impares = 0
+numero_Mayor_Par = "NINGUNO"
 bandera_Par = 0
 suma_Positivos = 0
+producto_negativos = 1
 
 
 while contador < 2:
-    numero = input("ingrese un numero: ")
-    numero = int(numero)
+    numero_ingresado = input("ingrese un numero: ")
+    numero = int(numero_ingresado)
     #a. Cantidad de pares e impares.
     resto = numero % 2
     resto = int(resto)
@@ -38,17 +40,21 @@ while contador < 2:
     #d. Suma de los positivos.
     if numero > -1:
         suma_Positivos = suma_Positivos + numero
-    #e. Producto de los negativos.      
+    #e. Producto de los negativos.  
+    if numero < 0:
+        producto_negativos = producto_negativos * numero    
     contador = contador + 1 
 
-numero_Menor = str(numero_Menor)
-suma_Positivos = str(suma_Positivos)
-contador_Impares = str(contador_Impares)
-contador_Pares = str(contador_Pares)
-numero_Mayor_Par = str(numero_Mayor_Par)
+# numero_Menor = str(numero_Menor)
+# suma_Positivos = str(suma_Positivos)
+# contador_Impares = str(contador_Impares)
+# contador_Pares = str(contador_Pares)
+# numero_Mayor_Par = str(numero_Mayor_Par)
 
-print("Cantidad Pares: " + contador_Pares)
-print("Cantidad impares: " + contador_Impares)
-print("El menor numero ingresado: " + numero_Menor)
-print("El mayor numero par: " + numero_Mayor_Par)
-print("Suma de numeros positivos: " + suma_Positivos)
+# print("Cantidad Pares: " + contador_Pares)
+# print("Cantidad impares: " + contador_Impares)
+# print("El menor numero ingresado: " + numero_Menor)
+# print("El mayor numero par: " + numero_Mayor_Par)
+# print("Suma de numeros positivos: " + suma_Positivos)
+
+print("Cantidad Pares: {} Cantidad impares: {} El menor numero ingresado: {} El mayor numero ingrsado par: {} Suma de los positivos {} Producto de los negativos: {} ".format(contador_Pares,contador_Impares,numero_Menor,numero_Mayor_Par,suma_Positivos,producto_negativos))
