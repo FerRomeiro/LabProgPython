@@ -1,12 +1,13 @@
 from data_stark import lista_heroes
-
+#crl+D   crlt+shift+l shift y con las flechas shift+alt+flechita para abajo
 def menu():
+
     print("A.Recorrer la lista imprimiendo por consola el nombre de cada superhéroe")
+    print("F.Informar cual es el Nombre del superhéroe asociado a cada uno de los indicadores anteriores (MÁXIMO, MÍNIMO)")
     print("B.Recorrer la lista imprimiendo por consola nombre de cada superhéroe junto a la altura del mismo")
     print("C.Recorrer la lista y determinar cuál es el superhéroe más alto (MÁXIMO)")
     print("D.Recorrer la lista y determinar cuál es el superhéroe más bajo (MÍNIMO)")
     print("E.Recorrer la lista y determinar la altura promedio de los superhéroes PROMEDIO")
-    print("F.Informar cual es el Nombre del superhéroe asociado a cada uno de los indicadores anteriores (MÁXIMO, MÍNIMO)")
     print("G.Calcular e informar cual es el superhéroe más y menos pesado")
     print("H.")
     print("I.")

@@ -42,6 +42,7 @@ print(video_Mas_Reproducciones,mayor_Cantidad)
 
 mayor_Cantidad = lista_bzrp[0] ["views"] #LE PASAMOS UN INDICE, la cant de reproducciones del primer diccionario
                 #accedemos a un diccionario y de ese al valor de reproducciones con la calve views
+video_Mas_Reproducciones = lista_bzrp[0]["title"]
 for video in lista_bzrp:
 
     if video["views"] > mayor_Cantidad: #accedemos a una lista y a su vez a una clave valor de ese primer elemento
