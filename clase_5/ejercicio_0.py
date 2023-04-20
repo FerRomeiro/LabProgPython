@@ -1,31 +1,5 @@
 from data_stark import lista_personajes
-
-# 1.1. Crear la función ‘extraer_iniciales’ que recibirá como parámetro:
-# ● nombre_heroe: un string con el nombre del personaje
-# La función deberá devolver a partir del parámetro recibido un nuevo string con
-# las iniciales del nombre del personaje seguidos por un punto (.)
-# ● En el caso que el nombre del personaje contenga el artículo ‘the’ se
-# deberá omitir de las iniciales
-# ● Se deberá verificar si el nombre contiene un guión ‘-’ y sólo en el caso
-# que lo tenga se deberá reemplazar por un espacio en blanco
-# La función deberá validar:
-# ● Que el string recibido no se encuentre vacío
-# Devolver ‘N/A’ en caso de no cumplirse la validación
-
-# Ejemplo de la salida de la función para Howard the Duck:
-# H.D.
-
-# 1.2. Crear la función ‘definir_iniciales_nombre’ la cual recibirá como parámetro:
-# ● heroe: un diccionario con los datos del personaje
-
-# La función deberá agregar una nueva clave al diccionario recibido como
-# parámetro. La clave se deberá llamar ‘iniciales’ y su valor será el obtenido de
-# llamar a la función ‘extraer_iniciales’
-# La función deberá validar:
-# ● Que el dato recibido sea del tipo diccionario
-# ● Que el diccionario contengan la clave ‘nombre’
-# En caso de encontrar algún error retornar False, caso contrario retornar True
-
+#1.1
 def extraer_iniciales (nombre_heroe):
     iniciales = ""
     nombre_heroe = nombre_heroe.replace("the ", " ")
@@ -37,17 +11,126 @@ def extraer_iniciales (nombre_heroe):
             iniciales = "N/A" 
         else: 
             iniciales += heroe[:1]
+            iniciales = ".".join(iniciales)
 
-    #print(iniciales)
+    # print(iniciales)
     return iniciales
 
 def listar_iniciales(heroes):
     lista_iniciales=[]
 
     for heroe in heroes:
-
         lista_iniciales.append(extraer_iniciales(heroe["nombre"]))
-    print(lista_iniciales)    
+        cadena=". ".join(lista_iniciales)
+
+    print(cadena)    
+#1.2
+
+# Crear la función ‘definir_iniciales_nombre’ la cual recibirá como
+# parámetro:
+# heroe: un diccionario con los datos del personaje
+# La función deberá agregar una nueva clave al diccionario recibido como
+# parámetro. La clave se deberá llamar ‘iniciales’ y su valor será el obtenido de
+# llamar a la función ‘extraer_iniciales’
+# La función deberá validar:
+# Que el dato recibido sea del tipo diccionario
+# Que el diccionario contengan la clave ‘nombre’
+# En caso de encontrar algún error retornar False, caso contrario retornar True
+
+def definir_inciales_nombre(heroe):
+    
+    if type(heroe) is not dict:
+        return False
+    if "nombre" not in heroe:
+        return False
+    
+    heroe["iniciales"] = extraer_iniciales(heroe["nombre"])
+
+    return True
+
+# 1.3. Crear la función ‘agregar_iniciales_nombre’ la cual recibirá como
+# parámetro:
+# lista_heroes: lista de personajes
+# Se deberá validar:
+# Que lista_heroes sea del tipo lista
+# Que la lista contenga al menos un elemento
+# La función deberá iterar la lista_heroes pasándole cada héroe a la función
+# definir_iniciales_nombre.
+# En caso que la función definir_iniciales_nombre() retorne False entonces se
+# deberá detener la iteración e informar por pantalla el siguiente mensaje:
+#  ‘El origen de datos no contiene el formato correcto’
+# La función deberá devolver True en caso de haber finalizado con éxito o False
+# en caso de que haya ocurrido un error
+
+def agregar_inciales_nombre(lista_heroes):
+
+    if type(lista_heroes) is not list:
+        return False
+    elif len(lista_heroes) == 0:
+        return False
+    else: 
+        for heroes in lista_heroes:
+            if not definir_inciales_nombre(heroes):
+                print("El origen de datos no contiene el formato correcto")
+                return False
+        return True
+
+# 1.4 Crear la función ‘stark_imprimir_nombres_con_iniciales’ la cual recibirá
+# como parámetro:
+# lista_heroes: la lista de personajes
+# La función deberá utilizar la función agregar_iniciales_nombre’ para añadirle
+# las iniciales a los diccionarios contenidos en la lista_heroes
+# Luego deberá imprimir la lista completa de los nombres de los personajes
+# seguido de las iniciales encerradas entre paréntesis ()
+# Se deberá validar:
+# Que lista_heroes sea del tipo lista
+# Que la lista contenga al menos un elemento
+# Delante de cada nombre se deberá agregar un asterisco ‘*’ (de forma de
+# viñeta) seguido de un espacio.
+# Ejemplo de salida:
+# * Howard the Duck (H.D.)
+# * Rocket Raccoon (R.R.) …
+# La función no retorna nada
+def stark_imprimir_nombres_con_iniciales(lista_heroes):
+
+    if type(lista_heroes) != list:
+        return
+    elif len(lista_heroes) == 0:
+        return
+    else:
+        if agregar_inciales_nombre(lista_heroes):
+            for heroes in lista_heroes:
+                nombre = heroes["nombre"]
+                iniciales = heroes["iniciales"]
+                print("*{}{}".format(nombre,iniciales))
+
+# 2.1. Crear la función ‘generar_codigo_heroe’ la cual recibirá como
+# parámetros:
+# id_heroe: un entero que representa el identificador del héroe.
+# NOTA: el valor de id_heroe lo vamos a generar recién el punto
+# 2.3. Para probar la función podes pasarle cualquier enterogenero_heroe: un string que representa el género del héroe ( puede
+# tomar los valores ‘M’, ‘F’ o ‘NB’)
+# La función deberá generar un string con el siguiente formato:
+# GENERO-000…000ID
+# Es decir, el género recibido por parámetro seguido de un ‘-’ (guión) y por
+# último el identificador recibido. Todos los códigos generados deben tener
+# como máximo 10 caracteres (contando todos los caracteres, inclusive el
+# guión). Se deberá completar con ceros para que todos queden del mismo
+# largo
+# Algunos ejemplos:
+# F-00000001
+# M-00000002
+# NB-0000010
+# La función deberá validar:
+# El identificador del héroe sea numérico.
+# El género no se encuentre vacío y este dentro de los valores esperados
+# (‘M’, ‘F’ o ‘NB’)
+# En caso de no pasar las validaciones retornar ‘N/A’. En caso de verificarse
+# correctamente retornar el código generado 
+
+
+
+
 
 
 def menu():
@@ -71,6 +154,7 @@ while continuar:
     match opciones:
         case "1":
 
+            # extraer_iniciales(lista_personajes)
             listar_iniciales(lista_personajes)
             #print("Eligio opcion 1")
             input("Presione una tecla para continuar")
