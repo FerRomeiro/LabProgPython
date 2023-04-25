@@ -51,6 +51,9 @@ def extraer_iniciales(nombre_heroe):
 
     # # Unir las iniciales con espacios
     # return "".join(iniciales)
+
+
+
     iniciales = []
     for heroe in nombre_heroe:
         name = heroe["nombre"]
@@ -68,11 +71,159 @@ def extraer_iniciales(nombre_heroe):
         for palabra in palabras:
             inicial += palabra[0].upper()+"."
 
-        # Agregar la inicial al resultado y un espacio
+        # Agregar resultado y un espacio
         iniciales.append(inicial + " ")
 
     # Unir las iniciales y devolverlas
     return "".join(iniciales)
+
+
+
+
+
+# 1.2. Crear la función ‘definir_iniciales_nombre’ la cual recibirá como
+# parámetro:
+# ● heroe: un diccionario con los datos del personaje
+
+# La función deberá agregar una nueva clave al diccionario recibido como
+# parámetro. La clave se deberá llamar ‘iniciales’ y su valor será el obtenido de
+# llamar a la función ‘extraer_iniciales’
+# La función deberá validar:
+# ● Que el dato recibido sea del tipo diccionario
+# ● Que el diccionario contengan la clave ‘nombre’
+# En caso de encontrar algún error retornar False, caso contrario retornar True
+
+def definir_iniciales_nombre(heroe):
+
+    if "nombre" in heroe and type(heroe) == dict:
+        nombre=heroe["nombre"]
+        iniciales=extraer_iniciales(nombre)
+        heroe["iniciales"]=iniciales
+        return True
+    else:
+        return False
+
+
+
+def listar_iniciales(heroes):
+    lista_iniciales=[]
+
+    for heroe in heroes:
+        lista_iniciales.append(extraer_iniciales(heroe["nombre"]))
+        cadena=". ".join(lista_iniciales)
+
+    print(cadena)  
+
+
+
+
+
+
+
+
+
+
+
+
+
+def listar_iniciales_mia(lista):
+
+    heroes_iniciales=[]
+
+    for heroe in lista:
+        inicial=heroe["nombre"]
+        sin_the=inicial.replace("the"," ")
+        inicial_split=sin_the.split()
+
+        inicial_cadena_vacia=""
+        for palabras in inicial_split:
+            inicial_cadena_vacia=inicial_cadena_vacia + palabras[:1] + "." ## [0] PRIMER CARACTER [:1] PRIMER CARACTER, ES LO MISMO
+            # inicial_cadena_vacia=inicial_cadena_vacia + palabras[0] + "."
+        heroes_iniciales.append(inicial_cadena_vacia + " ")
+        resultado="".join(heroes_iniciales)
+
+    return resultado
+
+def extraer_iniciales_mia(heroe):
+
+    if heroe:
+        return "N/A"
+    
+    c=""
+    iniciales=heroe.replace("the"," ")
+    inicial_split=iniciales.split()
+
+    for name in inicial_split:
+        c=c+name[0]+"."
+
+    return c
+
+
+def definir_iniciales_nombre_mia(heroe):
+
+    if "nombre" in heroe and type(heroe) == dict:
+        heroe["iniciales"] = extraer_iniciales(heroe)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -101,15 +252,24 @@ while continuar:
     opcion=menu()
     
     match opcion:
-
+ 
         case "1":
             # print("opcion1")
-            e=extraer_iniciales(lista_personajes)
+            # e=extraer_iniciales(lista_personajes)
+            # print(e)
+            e=listar_iniciales_mia(lista_personajes)
             print(e)
         case "2":
-            print("opcion1")
+            e=extraer_iniciales_mia("Howard the Duck")
+            print(e)
+            # for personaje in lista_personajes:
+            #     p=definir_iniciales_nombre(personaje)
+            # print(p)
         case "3":
-            print("opcion1")
+            # l=listar_iniciales(lista_personajes)
+            for personajes in lista_personajes:
+                d=definir_iniciales_nombre_mia(personajes)
+            print("d")
         case "4":
             print("opcion1")
         case "5":
