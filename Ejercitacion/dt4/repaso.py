@@ -306,7 +306,7 @@ while continuar:
             #     print(c)
             print("opcion1")
         case "7":
-            # a=agregar_codigo_heroe(lista_personajes[0],"54")
+            a=agregar_codigo_heroe(lista_personajes[0],)
             print("asd")
         case "8":
             stark_generar_codigos_heroes(lista_personajes)
