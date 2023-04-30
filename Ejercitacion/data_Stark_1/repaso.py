@@ -1,4 +1,4 @@
-from data_stark import lista_personajes
+from dt6.data_stark import lista_personajes
 
 def menu():
 

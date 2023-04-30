@@ -1,4 +1,4 @@
-from data_stark import lista_personajes
+from dt6.data_stark import lista_personajes
 
 # 1.1. Crear la función ‘extraer_iniciales’ que recibirá como parámetro:
 # ● nombre_heroe: un string con el nombre del personaje

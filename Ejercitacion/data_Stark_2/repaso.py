@@ -1,4 +1,4 @@
-from data_stark import lista_personajes
+from dt6.data_stark import lista_personajes
 
 # B. Recorrer la lista imprimiendo por consola el nombre de cada superhéroe
 def imprimir_personajes(lista):
