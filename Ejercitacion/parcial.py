@@ -1,5 +1,5 @@
 import json
-
+import re
 
 #creo una funcion para acceder al json
 def parseo_json(stark:str)->list:
@@ -24,6 +24,12 @@ lista_aux=lista_heroes
 def cantidad_heroes()->int:
 
     valor=input("ingrese la cantidad de heroes que quiere listar: ")
+    # patron=r"[a-Za-z]"
+    # resultado=re.search(patron,valor)
+
+    # if resultado:
+    #     print("Dato invalido")
+        # valor=input("ingrese la cantidad de heroes que quiere listar: ")
 
     return valor
 
@@ -136,15 +142,101 @@ def ordenar_fuerza(lista:list,clave:str)->list:
 
 
 
+def clave_heroes()->str:
+    
+    clave=input("Ingrese el promedio que quiere sacar: ")
+
+    return clave
+
+
+def calcular_promedio(lista:list)->float:
+
+    # clave=input("Ingrese el promedio que quiere sacar: ")
+    clave=clave_heroes()
+    acumulador=0
+    contador=0
+
+    for i in range(len(lista)):
+        
+        acumulador=acumulador+float(lista[i][clave])
+        contador=contador+1
+    
+    promedio=acumulador/contador
+
+    return promedio
+
+def mayor_menor_promedio(lista:list,clave:str)->list:
+
+    promedio=calcular_promedio(lista_aux)
+    valor=input("Calculas el menor/mayor??: ")
+    lista_heroes=[]
+
+    for i in  range(len(lista_aux)):
+        heroe_clave=float(lista_aux[i][clave])
+
+        if valor=="menor":
+            if heroe_clave < promedio:
+                lista_heroes.append(lista[i]["nombre"])
+        elif valor=="mayor":
+            if heroe_clave > promedio:
+                lista_heroes.append(lista[i]["nombre"]) 
+    
+    print(lista_heroes)
+
+# 5. Buscar héroes por inteligencia [good, average, high] y listar en consola los
+# que cumplan dicha búsqueda. (Usando RegEx)
+
+def patron_heroes()->str:
+    
+    patron=input("Escriba tipo de inteligencia que desea buscar[good, average, high]: ")
+
+    return patron
+
+
+def heroes_inteligencia(lista:list):
+    
+    lista_heroes=[]
+    patron=patron_heroes()
+
+    for i in range(len(lista)):
+        # patron="good"
+
+        cadena=lista[i]["inteligencia"]
+        resultado=re.match(patron,cadena)
+        # print(resultado)
+        if resultado:
+            lista_heroes.append(lista[i]["nombre"])
+            
+    
+    print(lista_heroes)
+
+
+# Exportar a CSV la lista de héroes ordenada según opción elegida
+# anteriormente [1-4]
+
+
+def guardar_csv_stark(nombre_archivo,lista:list):
+    #para trabajar con archivos primero debo abrirlo 
+    archivo=open(nombre_archivo,"w") # En este caso quiero empezar a escribir en un archivo asi que uso W y no R
+    #quiero escribir los datos de cada uno de los heroes 
+    for heroe in lista:
+        linea = heroe["nombre"] + "," + heroe["identidad"] + "," +heroe["empresa"] + ","+str(heroe["altura"]) + ","+str(heroe["peso"]) + ","+heroe["genero"] + ","+heroe["color_ojos"] + ","+heroe["color_pelo"] + ","+str(heroe["fuerza"]) + ","+heroe["inteligencia"]+"\n"
+        #ahora quiero escribir la linea
+        archivo.write(linea)
+        #ahora cierro el archivo
+    archivo.close()
+
+
 
 def menu():
 
     print("1. Listar los primeros N héroes.")
     print("2. Ordenar y Listar héroes por altura.")
     print("3. Ordenar y Listar héroes por fuerza.")
-    print("4")
-    print("5")
-
+    print("4. Calcular promedio de cualquier key numérica.")
+    print("5. Buscar héroes por inteligencia [good, average, high].")
+    print("6. Exportar a CSV la lista de héroes ordenada según opción elegida anteriormente [1-4]")
+    print("7. Exit")
     opcion=input("Eliga una opcion: ")
 
     return opcion
@@ -173,9 +265,15 @@ while continuar:
             print(orden)
             input("Presione una tecla para continuar...")
         case "4":
-            print("opcion1")
+            # print("opcion1")
+            # calcular_promedio(lista_heroes)
+            mayor_menor_promedio(lista_aux,"fuerza")
             input("Presione una tecla para continuar...")
         case "5":
+            heroes_inteligencia(lista_aux)
+        case "6":
+            guardar_csv_stark("repaso/data_stark.csv",lista_aux)
+        case "7":
             print("Chau")
             continuar=False
     
