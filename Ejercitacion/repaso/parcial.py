@@ -12,7 +12,7 @@ def parseo_json(stark:str)->list:
 
 lista_heroes=parseo_json("repaso\stark.json")
 
-lista_aux=lista_heroes
+lista_aux=lista_heroes.copy()
 
 
 # print(lista_heroes)
@@ -21,22 +21,48 @@ lista_aux=lista_heroes
 # 1. Listar los primeros N héroes. El valor de N será ingresado por el usuario
 # (Validar que no supere max. de lista)
 
-def cantidad_heroes()->int:
+# def cantidad_heroes()->int:
 
-    valor=input("ingrese la cantidad de heroes que quiere listar: ")
-    # patron=r"[a-Za-z]"
-    # resultado=re.search(patron,valor)
+    
+#     valor=input("ingrese la cantidad de heroes que quiere listar: ")
+#     # patron=r"[A-Za-z]"
+#     patron=r"[0-9]"
+#     resultado=re.search(patron,valor)
+#     print(resultado)
 
-    # if resultado:
-    #     print("Dato invalido")
-        # valor=input("ingrese la cantidad de heroes que quiere listar: ")
+#     while resultado == None:
+
+#         print("Dato invalido")
+#         valor=input("ingrese la cantidad de heroes que quiere listar: ")
+#         resultado=re.search(patron,valor)
+        
+
+#     return valor
+
+
+def cantidad_heroes(mensaje:str)->int:
+
+    
+    valor=input(mensaje)
+    # patron=r"[A-Za-z]"
+    patron=r"[0-9]"
+    resultado=re.search(patron,valor)
+    print(resultado)
+
+    while resultado == None:
+
+        print("Dato invalido")
+        valor=input(mensaje)
+        resultado=re.search(patron,valor)
+        
 
     return valor
 
 
-def listar(lista:list):
 
-    numero=int(cantidad_heroes())
+def listar(lista:list)->list:
+
+    numero=int(cantidad_heroes("ingrese la cantidad de heroes que quiere listar: "))
     # numero=int(input("ingrese la cantidad de heroes que quiere listar: "))
 
     if numero < len(lista):
@@ -226,6 +252,21 @@ def guardar_csv_stark(nombre_archivo,lista:list):
         #ahora cierro el archivo
     archivo.close()
 
+def csv(nombre_archivo):
+
+    archivo=open(nombre_archivo,"r")
+
+    valor=archivo.read()
+    valor=valor.split("\n")
+    # print(valor)
+    for i in valor:
+        heroe=i.split(",")
+        # print(heroe)
+        diccionario={"nombre":heroe[0],"empresa":heroe[1]}
+        print(diccionario)
+        
+    archivo.close()
+    
 
 
 def menu():
@@ -274,6 +315,8 @@ while continuar:
         case "6":
             guardar_csv_stark("repaso/data_stark.csv",lista_aux)
         case "7":
+            csv("repaso\data_stark.csv")
+        case "8":
             print("Chau")
             continuar=False
     
