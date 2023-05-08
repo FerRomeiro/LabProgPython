@@ -251,24 +251,6 @@ def guardar_csv_stark(nombre_archivo,lista:list):
         #ahora cierro el archivo
     archivo.close()
 
-# guardar_csv_stark("repaso\parcial.csv",lista_aux)
-
-
-def csv(nombre_archivo):
-
-    archivo=open(nombre_archivo,"r")
-
-    valor=archivo.read()
-    valor=valor.split("\n")
-    # print(valor)
-    for i in valor:
-        heroe=i.split(",")
-        # print(heroe)
-        diccionario={"nombre":heroe[0],"empresa":heroe[1]}
-        print(diccionario)
-
-    archivo.close()
-    
 
 
 def menu():
@@ -317,10 +299,5 @@ while continuar:
         case "6":
             guardar_csv_stark("repaso/data_stark.csv",lista_aux)
         case "7":
-            csv("repaso\data_stark.csv")
-        case "8":
             print("Chau")
             continuar=False
-    
-
-

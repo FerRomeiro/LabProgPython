@@ -31,7 +31,11 @@ def pokemon_json(nombre_archivo_csv:str)->list:
         # print(pokemon)
         diccionario={"N° Pokedex":pokemon[0],"Nombre":pokemon[1],"Tipo":pokemon[2],"Poder de ataque":pokemon[3],"Poder de defensa":pokemon[4],"Habilidades":pokemon[5]}
         print(diccionario)
-        archivo.close()
+
+        archivo.write(diccionario)
+
+    archivo.close()
+
 
 
 
@@ -48,6 +52,7 @@ while continuar:
         case "1":
             # print("asd")
             pokemon_json("parcial_pokemon\pokemones.csv")
+            
             input("Ingrese una tecla para continuar...")
         case "2":
             print("asd")
