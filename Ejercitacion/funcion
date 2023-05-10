@@ -1,0 +1,139 @@
+FUNCIONES:
+Una funcion la vamos a escribir para hacer algo una vez y olvidarnos y la proxima vez q vamos hacer una tarea vamos a utilizarla
+no vamos a escribir el conjunto de intrucciones o algoritmo, solamente vamos a utilizar funcion
+Por ejemplo con print imprimo la pantalla y pongo entre parentesis lo que queremos imprimir. 
+Una funcion va a cumplir una funcion determinada para la cual existe esa funcion y lo que vamos a hacer es utilizar la funcion para no
+escribir una y otra vez la mismas intrucciones. Simplemente utilizamos la funcion.
+La funcion me permite reutilizar codigos que fue escrito una vez.
+Una funcion tiene un nombre, y van a devolver un valor o no. Y ese valor de retorno que devuelve es el valor que la funcion obtuvo luego de 
+ejecutar todo su algoritmo.
+Una funcion puede o no recibir parametros, y una funcion me retorna un resultado como valor a lo que le dije q haga.
+Hay 3 preguntas que tengo q responder q tiene que ver cuando vaya a escribir una funcion. 
+Que va hacer la funcion? 
+Que me va a devolver la funcion?
+Si la funcion va a recibir o no un parametro?
+
+Una funcion que hace, que me retorna y que me recibe ??
+Las funciones nos permite separar, dividir un gran problema en pequeños problemas, lo cual resulta mas facil que resolver un problema general o conjunto.
+def es su palabra reservada. 
+Llamo a la funcion le paso los parametro o argumentos, retorna el resultado o valor se ejecuta el = de asignacion y imprime con print el resultado
+documentar siempre que hacer que recibe y que retorna una funcion.
+Se usa underscore para escribir los nombres d ela funcion en caso que tenga mas de una palabra sumar_numeros
+Los nombres de los argumentos deben estar relacionados con lo que se guarda. 
+Los argumentos posicionales es la forma mas basica de pasar parametros. 
+el -> documenta el tipo de dato de retorno 
+
+CADENAS DE CARACTERES O STRINGS:
+Cuando ingresamos datos por input son cadenas de caracteres. 
+Un caracter es un simbolo que encontramos en el teclado, hay simbolos imprimibles o simbolos que no lo son como el enter o escape. 
+Una cadena de caracteres es una secuencia de caracteres, cuando ingresamos un dato por teclado ingresamos un dato del tipo STR string cadena
+Los caracteres especiales, son los no imprimibles. 
+El metodo es una funcion asociado a una variable del tipo de caracteres, o una funcion asociada a una cadena de caracteres.
+Una cadena va entre "", las cadenas en python son del tipo inmutable que permite almacenar secuencias de caracteres. 
+\n es el famoso escape de la cadena q escribo. y no es imprimible es un caracter especial
+Un metodo es una funcion especial que existe para un dato en particular, no es mas ni menos q una funcion, y se llama metodo porque la diferencia 
+es que metodo esta asociado a una variable del tipo de cadena de caracteres, la asocio con el punto y el nombre de la funcion que en este caso es el metodo. 
+variable.strip() donde strip es el metodo.
+el metodo strip elimina todos los caracteres vacios que pueda contener la variable
+variable.lower()
+el metodo lower convierte a letras minusculas
+variable.upper()
+este metodo y el anterior se usan para normalizar datos, y este es para convertir en mayusculares. 
+El metodo siempre pertenece a la cadena de caracteres. 
+cadena.capitalize()
+este metodo pasa a mayuscula solamente la primera letra de la cadena y el resto en minuscula
+
+cadena.replace()
+este metodo reemplaza un conjunto de caracteres por otro.
+texto="hola mundo"
+print(tecto.replace("la","asd")) # hoasd mundo
+
+cadena.split()
+cadena=cadena.split() el metodo split divide una cadena en subcadenas y cada subcadena forma parte de una lista
+cadena.join()
+
+cadena=+
+cadena=cadena.join(["A","B","C"]) el metodo join devuelve la cadena unida a cada uno de los elementos de la lista que se le pasa como parametro
+print(cadena) # A+B+C
+
+zfill
+este metodo completa con 0 a la izquierda hasta la longitud pasada como parametro
+cadena="314"
+print(cadena.zfill)(6) # 000314 donde 6 osea la longitu es la cantidad total
+len()
+este metodo mepermite saber la longitud de la cadena de texto dentro de la variable de ese momento
+cadena="Hola"
+print(len(cadena)) #3 
+me retorna un valor entero que la cantidad de caracteres que tiene una cadena 
+isalpha()
+este metodo devuelve True si todos los caracteres son alfabeticos, False de lo contrario 
+cadena="Hola mundo"
+print(cadena.isalpha()) # False por el espacio
+cadena="hola"
+print(cadena.isalpha()) #True
+isalnum()
+devuelve True si todos los caracteres son alfanumericos, False lo contrario
+cadena="Hola mundo 123"
+print(cadena.isalnum()) #False por el espacio
+cadena="Holamundo123"
+print(cadena.isalnum()) #True 
+count()
+este metodo cuenta las ocurrencia que hay de una cadena dentro de otra cadena
+cadena="Hola mundo hola"
+print(cadena.count("la")) #2 porque son 2 veces que se encuentra la
+format()
+el metodo format para formatear las cadenad de caracteres en una impresion 
+slice:
+sirve para recortar cadenas en rebanadas
+cadena="Hola mundo"
+print(cadena[5:10]) #mundo desde el caracter 5 hasta el 10
+print(cadena[5:]) #mundo desde el caracter 5 hasta el final
+print(cadena[:5]) #Hola le digo hasta el espacio 5 
+tener en cuenta que el primero numero es inclusivo y el segundo lo exclusivo es decir que lo excluye 
+
+EXPRESIONES REGULARES:
+son una seria de simbolos que nos permitira definir patrones de busqueda en cadenas de texto.
+importar re
+es lo primero q se hace para utilizar a partir de este paquete su funcionalidad que es un conjunto de metodos q nos permite controlar una cadena
+de caracteres 
+cualquier texto = [a-zA-Z]
+cualquier numero = [0-9]
+split()
+retorna una lista que contiene una cadena divida por el numero de ocurrencias del patron. 
+texto="1 uno 2 dos 3 tres"
+print(re.split("[0-9]+",texto)) # [uno,dos,tres]
+search()
+retorna re.Match object si contiene por lo menos una ocurrencia del patron y None sino.
+import re
+texto="1 uno 2 dos 3 tres"
+print(re.search(" ",texto)) # <re.Match object; span=(0,1), match= " "> #EL SPAN MARCA LA POSICION DONDE ENCONTRO 
+print(re.search([0-9],texto)) # <re.Match object; span=(5,6), match= "1"> #EL SPAN MARCA LA POSICION DONDE ENCONTRO 
+findall()
+retorna una lista que contiene todas las coincidencias del patron 
+import re
+texto=" uno 1 dos 2 tres 3 cuatro"
+print(re.findall(" ",texto)) # [" "," "," "," "," "," "," "]
+sub()
+reemplaza una o mas coincidencias
+texto="hola mundo"
+print(re.sub("hola"," ",texto)) # "mundo"
+
+ARCHIVOS:
+procesador de texto le das color fondo negrita la letra sea mas chica o grande etc. Editor de texto usamos para escribir programas, y no es un procesador
+de texto 
+El archivo del tipo texto cuando lo abrimos con un editor vemos texto legible y un archivo binario cuando lo abrimos vemos caracteres especiales o raros
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
