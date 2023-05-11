@@ -164,6 +164,17 @@ def ordenar_fuerza(lista:list,clave:str)->list:
 
     return lista_aux
 
+# def listar_cantidad_clave(lista,clave):
+#     # validar_lista(lista)
+#     lista_clave=set(elemento[clave].upper() for elemento in lista)
+#     diccionario={}
+#     for nivel in lista_clave:
+#         diccionario["{0}",format(nivel)] = 0
+#         for elemento in lista:
+#             if elemento[clave].upper() == nivel :
+#                 # diccionario["0",format(nivel)+=1]
+#     for key in diccionario:
+#         print("{0}:cantidad{1}".format(key,diccionario[key]))
 
 
 
