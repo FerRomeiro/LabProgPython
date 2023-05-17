@@ -67,32 +67,32 @@ def lista_no_pelea(lista_juegos:list)->list:
 
 def decada(mensaje:str):
     valor=input(mensaje)
-    patron=r"[1,0,8,9]"
-    resultado=re.search(patron,valor[0])
+    # print(valor[2])
+    patron=r"[1,8,9,2]"
+    resultado=re.search(patron,valor[2])
     # patron_dos=r"[1-9]"
     # resultado_dos=re.search(patron_dos,valor[1])
     # print(resultado_dos)
     
-    if valor[2] != "0":
+    while resultado == None or len(valor)<4:
 
-        while resultado == None or len(valor)>2:
-
-            print("Dato invalido")
-            valor=input(mensaje)
-            resultado=re.search(patron,valor)
+        print("Dato invalido")
+        valor=input(mensaje)
+        resultado=re.search(patron,valor)
         
-    
+
     return valor
 
 
 def decada_juegos(lista_aux:list):
     
-    numero=str(decada("Ingrese una decada valida (80/90/00/10): "))
+    numero=str(decada("Ingrese una decada valida (1980/1990/2000/2010/2020): "))
     # numero=[]
     # numero.append(numero_decada)
     # print(type(numero))
 
     numero=list(numero)
+    print(numero)
     # print(type(numero))
     # print(numero[2])
     numero=numero[2]
@@ -145,13 +145,12 @@ def manera_asc_desc()->str:
 def juegos_ordenados_empresas(lista_aux:list,clave:str)->list:
 
     valor=manera_asc_desc()
-    
-
     bandera_swap=True
-
+    
     while bandera_swap:
         bandera_swap=False
-        for i in range(len(lista_aux)-1): 
+        for i in range(len(lista_aux)-1):
+            # print(lista_aux[i][clave]) 
             if valor=="asc":
                 if lista_aux[i][clave]>lista_aux[i+1][clave]:
                     aux=lista_aux[i]
@@ -165,7 +164,69 @@ def juegos_ordenados_empresas(lista_aux:list,clave:str)->list:
                     lista_aux[i+1]=aux
                     bandera_swap=True
 
-    return lista_aux
+    # return lista_aux
+        empresas_ordenadas =(list(set([x["empresa"] for x in lista_aux])))
+        # print(empresas_ordenadas)
+
+    #USO SET PARA CREAR UNA LISTA DE "EMPRESA" DE LA LISTA ORIGINAL, RECORDEMOS QUE ES UNA LISTA INMUTABLE 
+#   #USO SORTED PARA ORDENAR ESE CONJUNTO DE EMPRESAS DE FORMA ALFABETICA
+# [x["empresas"] for x in lista_aux]: esta es una lista de comprensión que extrae los valores de la clave "empresas" de cada elemento en la lista lista_aux.
+    # set(...): esto convierte la lista de valores en un conjunto, eliminando así los valores duplicados.
+    # list(set(...)): esto convierte el conjunto de valores únicos de nuevo en una lista.
+    # sorted(list(set(...))): esto ordena la lista de valores únicos en orden alfabético.
+#     # empresas_ordenadas = ...: esto asigna la lista ordenada de valores únicos a la variable empresas_ordenadas.
+        lista_ordenada = [empresa for empresa in empresas_ordenadas]
+# [empresa for empresa in empresas_ordenadas]: esto es una lista de comprensión que crea una nueva lista, utilizando cada valor de la lista empresas_ordenadas.
+#  El resultado es una nueva lista que contiene los mismos valores que empresas_ordenadas, pero en un orden específico.
+# lista_ordenada = ...: esto asigna la nueva lista ordenada a la variable lista_ordenada.
+    return empresas_ordenadas
+
+
+#LEER ESTA INFO:
+# def listar_cantidad_clave(lista,clave):
+#     validar_lista(lista)
+#     lista_clave=set(elemento[clave].upper() for elemento in lista)
+#     diccionario_cantidades={}
+#     print(lista_clave)
+#     for nivel in lista_clave:
+#         diccionario_cantidades["{0}".format(nivel)] = 0
+#         for elemento in lista:
+#             if elemento[clave].upper()==nivel:
+#                 diccionario_cantidades["{0}".format(nivel)] +=1
+#     for key in diccionario_cantidades:
+#         print("{0} :cantidad {1}".format(key,diccionario_cantidades[key]))
+
+# def listar_cantidad_clave(lista,clave):: esto define una función llamada listar_cantidad_clave que 
+# toma dos argumentos: lista es la lista de diccionarios que se va a procesar y clave es la clave cuyos valores se van a contar.
+
+# validar_lista(lista): esto es una función auxiliar que verifica si la lista es válida.
+
+# lista_clave=set(elemento[clave].upper() for elemento in lista): esto crea un conjunto de valores únicos de la clave especificada, 
+# convirtiendo cada valor a mayúsculas.
+
+# diccionario_cantidades={}: esto crea un diccionario vacío que se utilizará para almacenar las cantidades de cada valor de la clave.
+
+# print(lista_clave): esto imprime los valores únicos de la clave.
+
+# for nivel in lista_clave:: esto itera sobre los valores únicos de la clave.
+
+# diccionario_cantidades["{0}",format(nivel)] = 0: esto crea una nueva entrada en el diccionario diccionario_cantidades para el valor actual de nivel,
+#  con un valor inicial de cero.
+
+# for elemento in lista:: esto itera sobre la lista original.
+
+# if elemento[clave].upper()==nivel:: esto comprueba si el valor de la clave en elemento es igual al valor actual de nivel.
+
+# diccionario_cantidades["{0}".format(nivel)] +=1: si se cumple la condición anterior, esto incrementa el valor correspondiente en el diccionario 
+# diccionario_cantidades para el valor actual de nivel.
+
+# for key in diccionario_cantidades:: esto itera sobre las claves del diccionario diccionario_cantidades.
+
+# print("{0} :cantidad {1}".format(key,diccionario_cantidades[key])): esto imprime cada clave y su cantidad correspondiente 
+# en el diccionario diccionario_cantidades
+
+
+
 
 # 4) Buscar juegos por modo [multijugador, cooperativo] y listar en consola los que cumplan
 # dicha búsqueda. (Usando RegEx).
@@ -237,3 +298,10 @@ def main():
 
 
 main()
+
+
+
+
+
+
+#PREGUNTAR A VALERY POR VALIDACIONES DEL PUNTO 2 
