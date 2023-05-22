@@ -60,29 +60,35 @@ zfill
 este metodo completa con 0 a la izquierda hasta la longitud pasada como parametro
 cadena="314"
 print(cadena.zfill)(6) # 000314 donde 6 osea la longitu es la cantidad total
+
 len()
 este metodo mepermite saber la longitud de la cadena de texto dentro de la variable de ese momento
 cadena="Hola"
 print(len(cadena)) #3 
 me retorna un valor entero que la cantidad de caracteres que tiene una cadena 
+
 isalpha()
 este metodo devuelve True si todos los caracteres son alfabeticos, False de lo contrario 
 cadena="Hola mundo"
 print(cadena.isalpha()) # False por el espacio
 cadena="hola"
 print(cadena.isalpha()) #True
+
 isalnum()
 devuelve True si todos los caracteres son alfanumericos, False lo contrario
 cadena="Hola mundo 123"
 print(cadena.isalnum()) #False por el espacio
 cadena="Holamundo123"
 print(cadena.isalnum()) #True 
+
 count()
 este metodo cuenta las ocurrencia que hay de una cadena dentro de otra cadena
 cadena="Hola mundo hola"
 print(cadena.count("la")) #2 porque son 2 veces que se encuentra la
+
 format()
 el metodo format para formatear las cadenad de caracteres en una impresion 
+
 slice:
 sirve para recortar cadenas en rebanadas
 cadena="Hola mundo"
@@ -117,6 +123,18 @@ sub()
 reemplaza una o mas coincidencias
 texto="hola mundo"
 print(re.sub("hola"," ",texto)) # "mundo"
+
+La función match() solo verifica si el patrón coincide al principio de la cadena
+
+patron = r'^[A-Za-z]+$'
+
+cadena1 = "Hola"
+resultado1 = re.match(patron, cadena1)
+print(resultado1)  # Coincide
+
+cadena2 = "123"
+resultado2 = re.match(patron, cadena2)
+print(resultado2)  # No coincide
 
 ARCHIVOS:
 procesador de texto le das color fondo negrita la letra sea mas chica o grande etc. Editor de texto usamos para escribir programas, y no es un procesador

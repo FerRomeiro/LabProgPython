@@ -1,47 +1,6 @@
 import json
 import re 
-
-def menu():
-
-    print("1) Listar por pantalla los juegos cuyo género no contenga la palabra “pelea”")
-    print("2) Calcular y mostrar la cantidad de juegos de una década determinada")
-    print("3) Listar los juegos ordenados por Empresa")
-    print("4) Buscar juegos por modo [multijugador, cooperativo]")
-    print("5) Exportar a CSV la lista de juegos según opción 1 o 3")
-    print("6) Exit")
-
-    opcion=input("ingrese una opcion: ")
-
-    return opcion
-
-def main():
-
-
-    juegos=parse_json("parcial_programacion\data_pp.json")
-
-    continuar=True
-
-    while continuar:
-
-        opcion=menu()
-
-        match opcion:
-            case "1":
-                opcion_juegos=lista_pelea(juegos)
-                print(len(opcion_juegos))
-                # print(opcion)
-            case "2":
-                print(juegos_decada(juegos))
-            case "3":
-                opcion_juegos=juegos_ordenados_empresas(juegos,"empresa")
-                # print(opcion)
-            case "4":
-                print(juegos_modo(juegos))
-            case "5":
-                guardar_csv("parcial_programacion\juegos.csv",opcion_juegos)    
-            case "6":
-                continuar=False
-                print("CHAU")
+import csv
 
 
 def parse_json(nombre_archivo:str)->list:
@@ -51,6 +10,73 @@ def parse_json(nombre_archivo:str)->list:
     archivo.close()
 
     return lista
+
+def mostrar_menu(lista:list):
+
+    for elemento in lista:
+        print(elemento)
+
+def elegir_opcion(rango_min:int, rango_max:int)->int:
+
+    patron = r'^[{}-{}]$'.format(rango_min, rango_max)
+
+    while True:
+        numero = input("Elija una opcion ({}-{}): ".format(rango_min, rango_max))
+
+        if re.match(patron, numero):
+            return int(numero)
+
+        print("Número inválido. Ingresa nuevamente.")
+
+def main():
+
+
+    juegos=parse_json("parcial_programacion\data_pp.json")
+    lista_opciones_menu=["----------------------------------------------------------------------------------------",
+                    "1. Listar por pantalla los juegos cuyo género no contenga la palabra “pelea”",
+                    "2. Calcular y mostrar la cantidad de juegos de una década determinada, la misma será ingresada por el usuario por pantalla.",
+                    "3. Listar los juegos ordenados por Empresa. Preguntar al usuario si lo quiere ordenar de manera ascendente (‘asc’) o descendente („desc‟).",
+                    "4. Buscar juegos por modo [multijugador, cooperativo] y listar en consola los que cumplan dicha búsqueda.",
+                    "5. Exportar a CSV la lista de juegos según opción 1 o 3.",
+                    "6. Salir",
+                    "----------------------------------------------------------------------------------------"]
+
+
+    opcion=0
+
+    while opcion!=6:
+
+        mostrar_menu(lista_opciones_menu)
+        opcion=elegir_opcion(1,6)
+        match opcion:
+            case 1:
+                opcion_juegos_pelea=lista_pelea(juegos)
+                print(len(opcion_juegos_pelea))
+                # print(opcion)
+            case 2:
+                print(juegos_decada(juegos))
+            case 3:
+                opcion_juegos_empresas=juegos_ordenados_empresas(juegos,"empresa")
+                # print(opcion)
+            case 4:
+                print(juegos_modo(juegos))
+            case 5:
+                while True:
+                    exportar=input("Eliga la opcion que quiere exportar a csv (1 o 3): ")
+                    
+                    if re.match("^(1|3)$",exportar):
+                        exportar=int(exportar)
+                        match exportar:
+                            case 1:
+                                exportar_a_csv(opcion_juegos_pelea,"parcial_programacion\juegos.csv")
+                            case 3:
+                                exportar_a_csv(opcion_juegos_empresas,"parcial_programacion\juegos.csv")
+                    else:
+                        print("ingrese opcion valida")
+            case 6:
+                print("CHAU")
+
+
 
 # 1) Listar por pantalla los juegos cuyo género no contenga la palabra “pelea”.
 def lista_pelea(lista_juegos:list)->list:
@@ -179,17 +205,34 @@ def juegos_modo(lista_juegos:list)->list:
         
 # 5) Exportar a CSV la lista de juegos según opción 1 o 3.
 
-def guardar_csv(nombre_archivo:str,lista:list):
+def exportar_a_csv(lista, nombre_archivo):
+
+    if len(lista) == 0:
+        print("La lista de datos está vacía.")
+        return -1
+
+    nombres_columnas = list(lista[0].keys())
+
+    with open(nombre_archivo, "w", newline="") as archivo_csv:
+        escritor_csv = csv.DictWriter(archivo_csv, fieldnames=nombres_columnas)
+        escritor_csv.writeheader()
+
+        for datos in lista:
+            escritor_csv.writerow(datos)
+
+    print(f"Los datos se han exportado exitosamente al archivo {nombre_archivo}.csv.")
+
+# def guardar_csv(nombre_archivo:str,lista:list):
         
-    archivo=open(nombre_archivo,"w") 
+#     archivo=open(nombre_archivo,"w") 
 
-    for juegos in lista:
+#     for juegos in lista:
 
-        linea = str(juegos["id"]) + "," + juegos["nombre"] + "," +juegos["plataforma"] + ","+juegos["modo"] + ","+juegos["empresa"] + ","+str(juegos["anio"]) + ","+juegos["pais"] + ","+juegos["genero"]+"\n"
+#         linea = str(juegos["id"]) + "," + juegos["nombre"] + "," +juegos["plataforma"] + ","+juegos["modo"] + ","+juegos["empresa"] + ","+str(juegos["anio"]) + ","+juegos["pais"] + ","+juegos["genero"]+"\n"
 
-        archivo.write(linea)
+#         archivo.write(linea)
 
-    archivo.close()
+#     archivo.close()
 
 
 
