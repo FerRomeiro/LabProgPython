@@ -46,8 +46,10 @@ def heroes_ingresados(lista:list)->list:
     # print(heroes)
     lista_heroes=[]
 
-    for i in range(heroes):    
-        lista_heroes.append(lista[i]["nombre"])
+    for i in range(heroes):
+        lista_heroes.append(lista[i])
+
+        # lista_heroes.append(lista[i]["nombre"]) ESTA OPCION SOLO ME ANOTA EN LA LISTA EL NOMBRE DEL HEROE Y NO TODOS LOS DATOS, OPCION 6 NO SIRVE CON ESTA
 
     return lista_heroes
 
@@ -160,17 +162,35 @@ def heroes_inteligencia(lista:list):
 
     inteligencia=(set(x["inteligencia"] for x in lista))
     diccionario_inteligencia={}
-    for k in inteligencia:
-        diccionario_inteligencia[k] = []
 
+    for tipos_inteligencia in inteligencia:
+        diccionario_inteligencia[tipos_inteligencia] = []
     for i in inteligencia:
         for j in lista:
             if i == j["inteligencia"]:
-                diccionario_inteligencia["{0}".format(i)]+=j["nombre"]
+                diccionario_inteligencia["{0}".format(i)]+=re.split(", ",j["nombre"])
     
 
 
-    print(diccionario_inteligencia)
+    return diccionario_inteligencia
+
+
+def exportar_csv(lista:list, nombre_archivo:str):
+    if len(lista) == 0:
+        print("La lista de datos está vacía.")
+        return -1
+    nombres_columnas = list(lista[0].keys())
+
+    with open(nombre_archivo, "w", newline="") as archivo_csv:
+        escritor_csv = csv.DictWriter(archivo_csv, fieldnames=nombres_columnas)
+        escritor_csv.writeheader()
+
+        for datos in lista:
+            escritor_csv.writerow(datos)
+
+    print(f"Los datos se han exportado exitosamente al archivo {nombre_archivo}.csv.")
+
+
 
 
 
@@ -183,12 +203,13 @@ def menu():
                     "3)Ordenar y Listar héroes por fuerza. Preguntar al usuario si lo quiere ordenar de manera ascendente (‘asc’) o descendente (‘desc’)",
                     "4)Calcular promedio de cualquier key numérica, filtrar los que cumplan con la condición de superar o no el promedio (preguntar al usuario la condición:  ‘menor’ o ‘mayor’) se deberá listar en consola aquellos que cumplan con ser mayores o menores según corresponda.",
                     "5) Buscar héroes por inteligencia [good, average, high] y listar en consola los que cumplan dicha búsqueda. (Usando RegEx)",
-                    "6)Exit"]
+                    "6)Exportar a CSV la lista de héroes ordenada según opción elegidaanteriormente [1-4]",
+                    "7)Exit"]
     opcion=0
     lista_heroes=json_heroes("parcial_programacion\data_stark.json")
     copia_lista_heroes=lista_heroes.copy()
 
-    while opcion!=6:
+    while opcion!=7:
         mostar_menu(lista_opciones)
         opcion=opciones(1,6)
 
@@ -206,6 +227,20 @@ def menu():
             case 4:
                 print(promedio_heroes(copia_lista_heroes,"fuerza"))
             case 5:
-                print(heroes_inteligencia(copia_lista_heroes))
+                tipo_inteligencia=heroes_inteligencia(copia_lista_heroes)
+                print(tipo_inteligencia)
+            case 6:
+                opcion_exportar=input("Que lista desea exportar 1 o 3: ")
+
+                if re.match("^1|3$",opcion_exportar):
+                    opcion_exportar=int(opcion_exportar)
+                    match opcion_exportar:
+                        case 1:
+                            exportar_csv(lista_heroes_ingresados,"parcial_programacion\heroes.csv")
+                        case 3:
+                            exportar_csv(lista_heroes_fuerza,"parcial_programacion\heroes.csv")
+                else:
+                    print("Opcion invalidad, eliga 1 o 3: ")
+
 
 menu()
