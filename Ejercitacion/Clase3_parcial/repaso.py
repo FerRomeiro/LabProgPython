@@ -50,3 +50,4 @@ persona_2.presentarse()
 #el metodo presentarse es un metodo de clase 
 #instancia y objeto son lo mismo son sinonimos ahora si hicieramos el nombre de la clase . alguna accion ahi cambia las cosas 
 #persona_1.presentarse() != Persona.tipo 
+#
