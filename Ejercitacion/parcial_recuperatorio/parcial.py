@@ -86,7 +86,7 @@ def menu():
 
 
 # 1) Listar por pantalla los juegos cuyo género no contenga la palabra “pelea”.
-def pelea(lista_juegos):
+def pelea(lista_juegos:list)->list:
     
     lista=[]
     for juegos in lista_juegos:
@@ -113,7 +113,7 @@ def numero_decada()->str:
     return decada
     
 
-def decada(lista_juegos):
+def decada(lista_juegos)->list:
 
     decada=int(numero_decada())
     decada_final=decada + 10
@@ -172,7 +172,7 @@ def juegos_ordenados_empresas(lista_juegos:list,clave:str)->list:
 # 4) Buscar juegos por modo [multijugador, cooperativo] y listar en consola los que cumplan
 # dicha búsqueda. (Usando RegEx).
 
-def juegos_modo(lista_juegos):
+def juegos_modo(lista_juegos:list)->list:
     lista=[]
 
     for juegos in lista_juegos:
