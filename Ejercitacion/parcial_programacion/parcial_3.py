@@ -34,7 +34,7 @@ def cantidad_heroes()->int:
 
     while True:
         numero_heroes=str(input("ingrese la cantidad de heroes que desea listar entre 1-24: "))
-        if re.match(patron,numero_heroes) and numero_heroes<="24":
+        if re.match(patron,numero_heroes) and int(numero_heroes)<=24:
             return int(numero_heroes)
         else:
             print("NUMERO INVALIDO, REINGRESE UN NUMERO ENTRE 1-24")
