@@ -24,7 +24,7 @@ mayor_altura = float(lista_heroes[0]["altura"])
 for heroe in lista_heroes:
     altura=float(heroe["altura"])
     if altura > mayor_altura: 
-        mayor_altura = heroe["altura"] 
+        mayor_altura = float(heroe["altura"]) 
         nombre_heroe= heroe["nombre"]
 
 print(nombre_heroe,mayor_altura)

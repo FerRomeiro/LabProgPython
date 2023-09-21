@@ -87,7 +87,22 @@
 
 #1:11:20
 
-
+#Insert con SQLite
+#para poder insertar filas en una tabla:
+#usamos la sentencia insert
+#
+#import sqlite3
+#with sqlite.connect("CLASE_sqlite/bd_btf.bd") as conexion:
+#   try:
+#       conexion.execute("insert into personajes(nombre,apellido,anio)")  #ACA USAMOS LAS DOS PALABARAS RESERVADAS INSERTE INTO y luego le paso la tabla q en este caso es personaje
+                                                                            #y le paso el nombre de los campos entre ()
+                                                                            #no podemos el id porque es autoincremental y no se pone 
+#values (?,?,?)", ("Marty","McFLy","1968")) ##EN EL ORDEN DE OCURRENCIAS DE LOS NOMBRES DE LOS CAMPOS TIENE Q SER EL ORDEN DE OCURRENCIAS DE LOS DATOS QUE QUIERO GUARDAR COMO REGISTRO EN LA BASE DE DATOS 
+#       conexion.execute("insert into personajes(nombre,apellido,anio)")
+#values (?,?,?)", ("Emmet","Brown","1914"))
+#   conexion.commit() #Actualiza los datos realmente en la tabla
+#   except:
+#       print("Error")
 
 
 
