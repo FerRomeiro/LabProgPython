@@ -89,7 +89,7 @@ def extraer_iniciales(nombre_heroe):
 # parámetro. La clave se deberá llamar ‘iniciales’ y su valor será el obtenido de
 # llamar a la función ‘extraer_iniciales’
 # La función deberá validar:
-# ● Que el dato recibido sea del tipo diccionario
+# ● Que el dato recibido sea del tipo diccionario adsadasdsa
 # ● Que el diccionario contengan la clave ‘nombre’
 # En caso de encontrar algún error retornar False, caso contrario retornar True
 
